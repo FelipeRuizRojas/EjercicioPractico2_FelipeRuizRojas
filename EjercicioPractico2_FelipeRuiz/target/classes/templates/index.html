@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Plataforma de Eventos</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.0/font/bootstrap-icons.css" rel="stylesheet">
+    <style>
+        body { min-height: 100vh; display: flex; flex-direction: column; }
+        main { flex: 1; }
+        footer { background-color: #343a40; color: white; padding: 20px 0; margin-top: auto; }
+        .hero { background: #4e73df; color: white; padding: 80px 0; }
+    </style>
+</head>
+<body>
+    <nav th:replace="~{fragments/layout :: navbar}"></nav>
+
+    <main>
+        <section class="hero text-center">
+            <div class="container">
+                <h1><i class="bi bi-calendar-event"></i> Plataforma de Reservas de Eventos</h1>
+                <p class="lead mt-3">Administra eventos, usuarios y reservas de forma sencilla y eficiente</p>
+            </div>
+        </section>
+
+        <section class="container my-5">
+            <div class="row g-4">
+                <div class="col-md-4" sec:authorize="hasRole('ADMIN')">
+                    <div class="card h-100 shadow-sm border-primary">
+                        <div class="card-body text-center">
+                            <i class="bi bi-people display-3 text-primary"></i>
+                            <h5 class="card-title mt-3">Gestión de Usuarios</h5>
+                            <p class="card-text">Administra los usuarios del sistema, asigna roles y permisos.</p>
+                            <a th:href="@{/usuarios}" class="btn btn-primary">Ir a Usuarios</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4" sec:authorize="hasRole('ADMIN')">
+                    <div class="card h-100 shadow-sm border-success">
+                        <div class="card-body text-center">
+                            <i class="bi bi-shield-lock display-3 text-success"></i>
+                            <h5 class="card-title mt-3">Gestión de Roles</h5>
+                            <p class="card-text">Configura y administra los roles disponibles en el sistema.</p>
+                            <a th:href="@{/roles}" class="btn btn-success">Ir a Roles</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="card h-100 shadow-sm border-warning">
+                        <div class="card-body text-center">
+                            <i class="bi bi-calendar3 display-3 text-warning"></i>
+                            <h5 class="card-title mt-3">Gestión de Eventos</h5>
+                            <p class="card-text">Visualiza, crea y administra los eventos de la plataforma.</p>
+                            <a th:href="@{/eventos}" class="btn btn-warning">Ir a Eventos</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="card h-100 shadow-sm border-info">
+                        <div class="card-body text-center">
+                            <i class="bi bi-search display-3 text-info"></i>
+                            <h5 class="card-title mt-3">Consultas Avanzadas</h5>
+                            <p class="card-text">Realiza búsquedas por estado, fechas, nombre y más.</p>
+                            <a th:href="@{/consultas}" class="btn btn-info text-white">Ir a Consultas</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer th:replace="~{fragments/layout :: footer}"></footer>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Rol - Plataforma de Eventos</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.0/font/bootstrap-icons.css" rel="stylesheet">
+    <style>
+        body { min-height: 100vh; display: flex; flex-direction: column; }
+        main { flex: 1; }
+        footer { background-color: #343a40; color: white; padding: 20px 0; margin-top: auto; }
+    </style>
+</head>
+<body>
+    <nav th:replace="~{fragments/layout :: navbar}"></nav>
+
+    <main class="container my-4">
+        <div class="row justify-content-center">
+            <div class="col-md-5">
+                <div class="card shadow">
+                    <div class="card-header bg-success text-white">
+                        <h4 class="mb-0">
+                            <i class="bi bi-shield-plus" th:if="${rol.id == null}"></i>
+                            <i class="bi bi-shield-check" th:if="${rol.id != null}"></i>
+                            <span th:text="${rol.id == null} ? 'Nuevo Rol' : 'Editar Rol'"></span>
+                        </h4>
+                    </div>
+                    <div class="card-body">
+                        <form th:action="@{/roles/guardar}" method="post" th:object="${rol}">
+                            <input type="hidden" th:field="*{id}">
+
+                            <div class="mb-3">
+                                <label for="nombre" class="form-label">Nombre del Rol</label>
+                                <input type="text" class="form-control" id="nombre" th:field="*{nombre}"
+                                       placeholder="Ej: ADMIN, ORGANIZADOR, CLIENTE" required>
+                            </div>
+
+                            <div class="d-flex gap-2">
+                                <button type="submit" class="btn btn-success">
+                                    <i class="bi bi-save"></i> Guardar
+                                </button>
+                                <a th:href="@{/roles}" class="btn btn-secondary">
+                                    <i class="bi bi-arrow-left"></i> Cancelar
+                                </a>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <footer th:replace="~{fragments/layout :: footer}"></footer>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
